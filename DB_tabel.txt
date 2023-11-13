@@ -1,0 +1,47 @@
+All table
+
+1. table: User
+Fill            Fill type
+- name          string
+- email         string
+- password      string
+
+2. table: store
+Fill            Fill type
+- name          string
+- image         string
+- maount        integer
+- price_buy     integer
+- price_sell    integer
+
+3. table: transetion
+Fill            Fill type
+- tran_id       string
+- tran_type     string
+- product_id    integer
+- amount        integer
+- price         integer
+- trab_detail   string
+
+4. table: Bill
+Fill            Fill type
+- bill_id       string
+- customer_name string
+- customer_tel  string
+
+5. table bill_list
+Fill            Fill type
+- bill_id       string
+- name          string
+- amount        integer
+- price         integer
+
+List controller
+- billcontroller         ຈັດການຂໍ້ມູນໃບບິນ
+- storecontroller        ຈັດການສະຕ໋ອກສິນຄ້າ
+- transetioncontroller   ຈັດການທຸລະກຳ
+- Usercontroller         ຈັດການຜຼ້ໃຊ້
+- reportcontroller       ຈັດການລາຍງານ
+
+php artisan make:controller billcontroller
+
