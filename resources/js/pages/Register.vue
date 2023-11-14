@@ -92,6 +92,9 @@
 </template>
 
 <script>
+
+import axiox from 'axios';
+
 export default {
     name: 'Minipos12Register',
 
@@ -120,6 +123,18 @@ export default {
               this.show_error = false;
               this.Text_error = ''
               // ກວດສອບຖືກຕ້ອງ
+
+              axiox.post('api/register',{
+                from_user_name: this.user_name,
+                from_email: this.email,
+                from_password: this.password
+              }).then((res)=>{
+                console.log(res);
+              }).catch((err)=>{
+                console.log(err);
+              });
+
+
             } else{
               this.show_error = true;
               this.Text_error = 'ລະຫັດຜ່ານບໍ່ຄືກັນ!'

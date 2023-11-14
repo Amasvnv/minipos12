@@ -48,7 +48,7 @@
               </div> -->
             </div>
             <div class="mb-3">
-              <button class="btn btn-primary d-grid w-100" type="submit">ເຂົ້າສູ່ລະບົບ</button>
+              <button class="btn btn-primary d-grid w-100" type="submit">ເຂົ້າສູ່ລະບົບ</button>
             </div>
           
 
@@ -69,6 +69,9 @@
 </template>
 
 <script>
+
+import axiox from 'axios';
+
 export default {
     name: 'Minipos12Login',
 
