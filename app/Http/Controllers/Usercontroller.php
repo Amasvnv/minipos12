@@ -11,7 +11,7 @@ use JWTAuth;
 class Usercontroller extends Controller
 {
     //
-    public function register(request $request){
+    public function register(Request $request){
         try {
             //code...ບັນທຶກຂໍ້ມູນຢູເຊີໃຫ່ມ
             $user = new user([
@@ -37,5 +37,33 @@ class Usercontroller extends Controller
         ];
         return response()->Json($response);
     }
+
+    public function login(Request $request){
+        $user_login = [
+            'email' =>$response->login_email,
+            'password' =>$response->login_password
+        ];
+
+        $token = JWTAUTH::attempt($user_login);
+        $user = Auth::user();
+
+        if($token){
+
+            return response()->Json([
+                'success' => true,
+                'message' => 'ສຳເລັດແລ້ວ!',
+                'user' => $user,
+                'toker' => $token
+            ]);
+
+        } else{
+            return response()->Json([
+                'success' => true,
+                'message' => 'ລະຫັດຜ່ານຂອງທ່ານຫຼືອີເມວບໍ່ຖືກຕ້ອງ',
+                
+            ]);
+        }
+    }
+        
 
 }

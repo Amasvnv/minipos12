@@ -25,7 +25,7 @@
           
             <div class="mb-3">
               <label for="email" class="form-label">ອີເມວ</label>
-              <input type="text" class="form-control" id="email" name="email-username" placeholder="Enter your email or username" >
+              <input type="text" class="form-control" v-model="email" name="email-username" placeholder="Enter your email or username" >
             </div>
             <div class="mb-3 form-password-toggle">
               <div class="d-flex justify-content-between">
@@ -35,7 +35,7 @@
                 </a> -->
               </div>
               <div class="input-group input-group-merge">
-                <input type="password" id="password" class="form-control" name="password" placeholder="············" aria-describedby="password">
+                <input type="password" id="password" class="form-control" v-model="password" name="password" placeholder="············" aria-describedby="password">
                 <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
               </div>
             </div>
@@ -47,8 +47,13 @@
                 </label>
               </div> -->
             </div>
+
+            <div class="alert alert-warning" role="alert" v-if="show_error">
+                {{ Text_error }}
+             </div>
+
             <div class="mb-3">
-              <button class="btn btn-primary d-grid w-100" type="submit">ເຂົ້າສູ່ລະບົບ</button>
+              <button class="btn btn-primary d-grid w-100" :disabled="check_tb" @click="Login()">ເຂົ້າສູ່ລະບົບ</button>
             </div>
           
 
@@ -70,7 +75,11 @@
 
 <script>
 
-import axiox from 'axios';
+
+import axios from 'axios';
+
+
+
 
 export default {
     name: 'Minipos12Login',
@@ -78,8 +87,24 @@ export default {
     data() {
         return {
             
+            email: '',
+            password: '',
+            
+            show_error: false,
+            Text_error: ''
 
         };
+    },
+
+    computed:{
+      check_tb(){
+        if(this.email == '' || this.password == '' || this.password.length<4){
+          return true;
+        } else{
+          return false;
+        }
+      },
+
     },
 
     mounted() {
@@ -87,7 +112,28 @@ export default {
     },
 
     methods: {
-        
+        Login(){
+          if(this.email !='' || this.password !=''){
+             axiox.post('api/login',{
+                
+                login_email: this.email,
+                login_password: this.password
+              }).then((res)=>{
+                
+                if(res.data.success){
+                  this.show_error = false;
+                  this.Text_error = '';
+                } else{
+                  this.show_error = true;
+                  this.Text_error = res.data.message;
+                }
+                
+
+              }).catch((err)=>{
+                console.log(err);
+              });
+          }
+        }
     },
 };
 </script>

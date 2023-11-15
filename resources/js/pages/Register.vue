@@ -3,7 +3,7 @@
 
    
    
-   <div class="authentication-wrapper authentication-basic container-p-y col-md-3">
+   <div class="authentication-wrapper authentication-basic container-p-y col-md-4">
     <div class="authentication-inner">
       <!-- Register -->
       <div class="card">
@@ -130,6 +130,27 @@ export default {
                 from_password: this.password
               }).then((res)=>{
                 console.log(res);
+
+                if(res.data.success){
+                  this.show_error = false;
+                  this.Text_error = ''
+
+                  // ສຳສັ່ງລ້າງຂໍ້ຄວາມ
+
+                  this.user_name = '';
+                  this.email = '';
+                  this.password = '';
+                  this.password2 = '';
+
+                  // ຄຳສັ່ງສຳເລັດແລ້ວໄປຫນ້າອື່ນ
+
+                  this.$router.push('/login');
+
+                } else {
+                  this.show_error = true;
+                  this.Text_error = res.data.message;
+                }
+
               }).catch((err)=>{
                 console.log(err);
               });
