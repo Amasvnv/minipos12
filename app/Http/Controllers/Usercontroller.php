@@ -40,8 +40,9 @@ class Usercontroller extends Controller
 
     public function login(Request $request){
         $user_login = [
-            'email' =>$response->login_email,
-            'password' =>$response->login_password
+            // 'email'=>$response->login_email,
+            'email'=>$request->login_email,
+            'password' =>$request->login_password
         ];
 
         $token = JWTAUTH::attempt($user_login);
@@ -58,7 +59,7 @@ class Usercontroller extends Controller
 
         } else{
             return response()->Json([
-                'success' => true,
+                'success' => false,
                 'message' => 'ລະຫັດຜ່ານຂອງທ່ານຫຼືອີເມວບໍ່ຖືກຕ້ອງ',
                 
             ]);

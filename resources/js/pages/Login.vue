@@ -114,7 +114,8 @@ export default {
     methods: {
         Login(){
           if(this.email !='' || this.password !=''){
-             axiox.post('api/login',{
+            //  axiox.post('api/login',{
+              axios.post('api/login',{
                 
                 login_email: this.email,
                 login_password: this.password
@@ -123,6 +124,14 @@ export default {
                 if(res.data.success){
                   this.show_error = false;
                   this.Text_error = '';
+                  this.email = '',
+                  this.password = '',
+
+                  localStorage.setItem('web_token',res.data.token);
+                  localStorage.setItem('web_user',JSON.stringify(res.data.user));
+
+                  this.$router.push('/')
+
                 } else{
                   this.show_error = true;
                   this.Text_error = res.data.message;
