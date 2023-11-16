@@ -21,3 +21,5 @@ use App\Http\Controllers\Usercontroller;
 
 Route::post('register',[Usercontroller::class,'register']);
 Route::post('login',[Usercontroller::class,'login']);
+// Route::post('logout',[Usercontroller::class,'logout']);
+Route::get('logout',[UserController::class,'logout']);

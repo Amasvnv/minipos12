@@ -65,6 +65,27 @@ class Usercontroller extends Controller
             ]);
         }
     }
-        
+    public function logout(){
+
+
+        Auth::logout();
+        return response()->json([
+            'success' => true,
+            'message' => 'ອອກຈາກລະບົບສຳເລັດແລ້ວ!',
+        ]);
+
+
+        // JWTAuth::getToken()
+
+        // $token = JWTAuth::getToken();
+        // $invalidate = JWTAuth::invalidate($token);
+        // if($invalidate){
+        //     return response()->json([
+        //         'success' => true,
+        //         'message' => 'ສຳເລັດ!',
+        //     ]);
+        // }
+
+    } 
 
 }
