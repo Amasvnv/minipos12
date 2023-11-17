@@ -35,7 +35,7 @@
                                 <input
                                     type="text"
                                     class="form-control border-0 shadow-none ps-1 ps-sm-2"
-                                    placeholder="Search..."
+                                    placeholder="ຄົ້ນຫາຂໍ້ມູນ..."
                                     aria-label="Search..."
                                 />
                             </div>
@@ -54,7 +54,7 @@
                                     data-size="large"
                                     data-show-count="true"
                                     aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
-                                    >Star</a
+                                    >ຊື່: ຜູ້ນຳໃຊ້ລະບົບປະຈຸບັນ</a
                                 >
                             </li>
 

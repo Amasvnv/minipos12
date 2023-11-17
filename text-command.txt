@@ -18,7 +18,7 @@ Git
     - git pull                  : ຄຳສັ່ງ ອັບເດດ ຊ໋ອດໂຄດລ່າສຸດຈາກ github
 
     - git add . && git commit -m "ຂໍ້ຄວາມ" && git push
-    - git add . && git commit -m "ຂໍ້ຄວາມ" && git push
+    - git add . && git commit -m "ຂໍ້ຄວາມ" && git push -u origin main
 
 ຕິດຕັ້ງ JWT ສຳລັບ Laravel 
 
