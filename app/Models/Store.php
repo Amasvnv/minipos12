@@ -11,7 +11,7 @@ class Store extends Model
     protected $fillable = [
         'name',
         'image',
-        'maount',
+        'amount',
         'price_buy',
         'price_sell'
         

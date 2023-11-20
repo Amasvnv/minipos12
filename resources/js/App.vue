@@ -238,7 +238,7 @@
 
 <script>
 import axios from "axios";
-import { useStore } from "./Store/auth";
+import { useStore } from "./Store/auth"
 
 export default {
     name: "Minipos12App",
@@ -254,8 +254,8 @@ export default {
 
     methods: {
         Logout() {
-            axios
-                .get("api/logout", {
+            //console.log(this.store.get_token);
+            axios.get("api/logout", {
                     headers: {
                         Authorization: "Bearer " + this.store.get_token,
                     },

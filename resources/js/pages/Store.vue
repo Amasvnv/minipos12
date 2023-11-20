@@ -9,6 +9,8 @@
                         type="button"
                         class="btn rounded-pill btn-success me-2"
                         :disabled="CheckForm"
+                        @click="SaveStore()"
+                        
                     >
                         <i class="bx bxs-save fs-5 me-2"></i>ບັນທຶກ
                     </button>
@@ -148,13 +150,16 @@
 
                 <table class="table table-hover">
                     <thead>
+
                         <tr>
+                            
                             <th>ID</th>
                             <!-- <th class="fs-6">ຊື່ສິນຄ້າ</th> -->
                             <th>ຊື່ສິນຄ້າ</th>
                             <th>ລາຄາຊື້</th>
                             <th>ຈຳນວນ</th>
                             <th>ຈັດການລົບ-ແກ້ໄຂ</th>
+                            
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -173,6 +178,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
     name: "Minipos12Store",
 
@@ -187,7 +194,7 @@ export default {
                 price_buy: "",
                 price_sell: "",
             },
-            formType:true,
+            formType: true,
         };
     },
 
@@ -216,7 +223,7 @@ export default {
             this.FormStore.price_buy = "";
             this.FormStore.price_sell = "";
             this.FormStore.image = "";
-            this.image_pre = window.location.origin + '/assets/img/img.jpg';
+            this.image_pre = window.location.origin + "/assets/img/img.jpg";
             this.ShowForm = true;
             this.FormType = true;
         },
@@ -225,110 +232,32 @@ export default {
             this.showfrom = false;
         },
 
-        // test
+       SaveStore(){
+        if(this.formType){
 
-        SaveStore(){
+            // ເພີ່ມຂໍ້ມູນ
 
-            this.post_loading = true;
+            axios.post('api/store/add', this.FormStore).then((res)=>{
 
-            if(this.FormType){
-                // ເພີ່ມຂໍ້ມູນ
-
-                axios.post('api/store/add', this.FormStore,{ headers:{ "content-type":"multipart/form-data", Authorization: 'Bearer '+ this.store.get_token}}).then((res)=>{
-                    // console.log(res);
-                    if(res.data.success){
-                        this.ShowForm = false;
-                        this.GetStore();
-
-                        this.$swal({
-                        toast:true,
-                        position: 'top-end',
-                        icon: 'success',
-                        title: res.data.message,
-                        showConfirmButton: false,
-                        timer: 2500
-                        });
-
-
-                    } else {
-
-                        this.$swal({
-                        icon: 'error',
-                        title: 'ບໍ່ສຳເລັດ',
-                        text: res.data.message,
-                        showConfirmButton: false,
-                        timer: 3500
-                        });
-
-                    }
-              
-                    this.post_loading = false;
-
-                }).catch((error)=>{
-                    console.log(error);
-                    this.post_loading = false;
-                    if(error){
-                        if(error.response.status == 401){
-                            this.store.remove_token();
-                            this.store.remove_user();
-                            localStorage.removeItem('web_token');
-                            localStorage.removeItem('web_user');
-                            this.$router.push('/login')
-                        }
-                    }
-                })
-
-            } else {
-                // ອັບເດດຂໍ້ມູນ
-
-                axios.post(`api/store/update/${this.EditId}`, this.FormStore,{ headers:{ "content-type":"multipart/form-data", Authorization: 'Bearer '+ this.store.get_token}}).then((res)=>{
-                    // console.log(res);
-                    if(res.data.success){
-                        this.ShowForm = false;
-                        this.GetStore();
-
-                        this.$swal({
-                        toast:true,
-                        position: 'top-end',
-                        icon: 'success',
-                        title: res.data.message,
-                        showConfirmButton: false,
-                        timer: 2500
-                        });
-
-                    } else {
-                        this.$swal({
-                        icon: 'error',
-                        title: 'ບໍ່ສຳເລັດ',
-                        text: res.data.message,
-                        showConfirmButton: false,
-                        timer: 3500
-                        });
-                    }
-
-                    this.post_loading = false;
-
-                }).catch((error)=>{
-                    console.log(error);
-                    this.post_loading = false;
-                    if(error){
-                        if(error.response.status == 401){
-                            this.store.remove_token();
-                            this.store.remove_user();
-                            localStorage.removeItem('web_token');
-                            localStorage.removeItem('web_user');
-                            this.$router.push('/login')
-                        }
-                    }
-                })
-
-            }
-        },
-
-        // test
+                 console.log(res);
+            }).catch((error)=>{
+                console.log(error);
+            })
+        } else {
+            // ອັບເດດຂໍ້ມູນ
+        }
+       }
 
     },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+    .table:not(.table-dark) th{
+        font-size: 16px;
+    }
+
+    .table:not(.table-dark) td{
+        font-size: 16px;
+    }
+</style>

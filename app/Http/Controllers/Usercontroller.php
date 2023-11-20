@@ -54,7 +54,7 @@ class Usercontroller extends Controller
                 'success' => true,
                 'message' => 'ສຳເລັດແລ້ວ!',
                 'user' => $user,
-                'toker' => $token
+                'token' => $token
             ]);
 
         } else{
@@ -68,23 +68,23 @@ class Usercontroller extends Controller
     public function logout(){
 
 
-        Auth::logout();
-        return response()->json([
-            'success' => true,
-            'message' => 'ອອກຈາກລະບົບສຳເລັດແລ້ວ!',
-        ]);
+       // Auth::logout();
+       // return response()->json([
+       //     'success' => true,
+       //     'message' => 'ອອກຈາກລະບົບສຳເລັດແລ້ວ!',
+       // ]);
 
 
         // JWTAuth::getToken()
 
-        // $token = JWTAuth::getToken();
-        // $invalidate = JWTAuth::invalidate($token);
-        // if($invalidate){
-        //     return response()->json([
-        //         'success' => true,
-        //         'message' => 'ສຳເລັດ!',
-        //     ]);
-        // }
+         $token = JWTAuth::getToken();
+         $invalidate = JWTAuth::invalidate($token);
+         if($invalidate){
+             return response()->json([
+                 'success' => true,
+                 'message' => 'ສຳເລັດ!',
+             ]);
+         }
 
     } 
 

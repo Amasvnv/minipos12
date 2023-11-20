@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('image');
-            $table->integer('maount');
+            $table->integer('amount');
+            $table->integer('price_buy');
+            $table->integer('price_sell');
             $table->timestamps();
         });
     }
